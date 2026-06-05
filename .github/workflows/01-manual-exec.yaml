@@ -40,3 +40,11 @@ jobs:
       #executar os testes e2e
       - name: Executando testes e2e
         run: yarn run e2e 
+
+      # salvar o relatório do Playwright
+      - name: Salvar relatório Playwright
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+         name: playwright-report-actiontest
+         path: playwright-report/
