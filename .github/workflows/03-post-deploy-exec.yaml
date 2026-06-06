@@ -1,0 +1,57 @@
+# comentarios
+#CI de Nivel 03 - conectar a pipe 03 com a pipe 3 disparando automaticamente a 03 após a 01 finalizar
+#nome da pipeline
+name: "Execução por deploy"
+
+#pela identação identifica oq vai estar dentro
+#gatilho por conclusão de outra pipeline = workflow_run
+#gatilho agendado = schedule
+on:
+  workflow_run:
+   # fica dentro de [] pq é um array
+    workflows: ['Execução Manual']
+    #definir o status da pipeline na qual deve ser desparado essa pipe
+    #ou seja dispara essa pipe quando a 01 estiver finalizada
+    types:
+      - completed
+
+
+#Jobs = tarefas dentro da pipeline
+jobs:
+    #nome do job
+  e2e-tests:
+    #maquina onde o job vai rodar
+    runs-on: ubuntu-latest
+
+    #passos do job
+    steps:
+      #clone do projeto - essas actions já existem só precisamos usar.
+      - uses: actions/checkout@v4
+
+      #action para fazer a instalação do node
+      - uses: actions/setup-node@v4
+        with: 
+          node-version: 24.x 
+      #istalação do Yarn
+      - name: Instalando Yarn
+        run: npm install -g yarn
+      
+      #instalação das dependencias
+      - name: Istalando dependências
+        run: yarn
+
+      #instalação dos browser do Playwright
+      - name: Instalando Browsers do Playwright
+        run: yarn playwright install
+
+      #executar os testes e2e
+      - name: Executando testes e2e
+        run: yarn run e2e 
+
+      # salvar o relatório do Playwright
+      - name: Salvar relatório Playwright
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+         name: playwright-report-actiontest
+         path: playwright-report/
