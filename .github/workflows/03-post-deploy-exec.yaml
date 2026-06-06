@@ -9,7 +9,7 @@ name: "Execução por deploy"
 on:
   workflow_run:
    # fica dentro de [] pq é um array
-    workflows: ['Execução Manual']
+    workflows: ['Execução Manual', 'Execução Agendada']
     #definir o status da pipeline na qual deve ser desparado essa pipe
     #ou seja dispara essa pipe quando a 01 estiver finalizada
     types:
@@ -22,6 +22,8 @@ jobs:
   e2e-tests:
     #maquina onde o job vai rodar
     runs-on: ubuntu-latest
+
+    if: ${{github.event.workflow_run.conclusion == 'success'}}
 
     #passos do job
     steps:

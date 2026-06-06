@@ -1,7 +1,7 @@
 # comentarios
 #CI de Nivel 02 - Execução agendada
 #nome da pipeline
-name: "Scheduled execution"
+name: "Execução Agendada"
 
 #pela identação identifica oq vai estar dentro
 on:
