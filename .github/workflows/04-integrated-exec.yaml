@@ -10,7 +10,7 @@ name: 'Execução Integrada'
 on:
   workflow_dispatch:
 
-  #quando acontecer um push tem que rodar a pipe
+  #quando acontecer um push tem que rodar a pipe automaticamente
   push:
     branches:
       - master

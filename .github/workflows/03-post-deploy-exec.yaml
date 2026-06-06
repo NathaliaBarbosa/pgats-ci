@@ -14,6 +14,10 @@ on:
     #ou seja dispara essa pipe quando a 01 estiver finalizada
     types:
       - completed
+  #quando acontecer um push tem que rodar a pipe automaticamente
+  push:
+    branches:
+      - master
 
 #Jobs = tarefas dentro da pipeline
 jobs:

@@ -9,7 +9,13 @@ on:
     #cronograma de execução
     #cada numero do cron significa alguma coisa
     #1- minuto, 2- hora, 3-dia do mês, 4- mês, 5-dia da semana
-    - cron: '3 * * * *'
+    #roda toda sexta-feira a meia noite
+    - cron: '0 0 * * 5'
+
+  #quando acontecer um push tem que rodar a pipe automaticamente
+  push:
+    branches:
+      - master
 
 #Jobs = tarefas dentro da pipeline
 jobs:
