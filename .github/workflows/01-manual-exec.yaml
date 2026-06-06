@@ -11,7 +11,7 @@ on:
 
 #Jobs = tarefas dentro da pipeline
 jobs:
-    #nome do job
+  #nome do job
   e2e-tests:
     #maquina onde o job vai rodar
     runs-on: ubuntu-latest
@@ -23,12 +23,12 @@ jobs:
 
       #action para fazer a instalação do node
       - uses: actions/setup-node@v4
-        with: 
-          node-version: 24.x 
+        with:
+          node-version: 24.x
       #istalação do Yarn
       - name: Instalando Yarn
         run: npm install -g yarn
-      
+
       #instalação das dependencias
       - name: Istalando dependências
         run: yarn
@@ -39,12 +39,12 @@ jobs:
 
       #executar os testes e2e
       - name: Executando testes e2e
-        run: yarn run e2e 
+        run: yarn run e2e
 
       # salvar o relatório do Playwright
       - name: Salvar relatório Playwright
         uses: actions/upload-artifact@v4
         if: always()
         with:
-         name: playwright-report-actiontest
-         path: playwright-report/
+          name: playwright-report-actiontest
+          path: playwright-report/
